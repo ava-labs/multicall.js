@@ -59,7 +59,7 @@ export function isEmpty(obj) {
   return !obj || Object.keys(obj).length === 0;
 }
 
-export async function ethCall(rawData, { web3, rpcUrl, block, multicallAddress }) {
+export async function ethCall(rawData, { web3, ethers, rpcUrl, rpcHeaders, block, multicallAddress }) {
   const abiEncodedData = AGGREGATE_SELECTOR + strip0x(rawData);
   if (web3) {
     log('Sending via web3 provider');
@@ -67,13 +67,26 @@ export async function ethCall(rawData, { web3, rpcUrl, block, multicallAddress }
       to: multicallAddress,
       data: abiEncodedData
     });
+  } else if (ethers) {
+    log('Sending via ethers provider');
+    return ethers.send({
+      method: 'eth_call',
+      params: [
+        {
+          to: multicallAddress,
+          data: abiEncodedData
+        },
+        block || 'latest'
+      ]
+    });
   } else {
     log('Sending via XHR fetch');
     const rawResponse = await fetch(rpcUrl, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        ...rpcHeaders,
       },
       body: JSON.stringify({
         jsonrpc: '2.0',

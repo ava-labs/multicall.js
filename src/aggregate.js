@@ -12,7 +12,7 @@ export function _makeMulticallData(calls) {
   const values = [
     calls.map(({ target, method, args, returnTypes }) => [
       target,
-      keccak256(method).substr(0, 10) +
+      keccak256(method).substring(0, 10) +
       (args && args.length > 0
         ? strip0x(encodeParameters(args.map(a => a[1]), args.map(a => a[0])))
         : '')
