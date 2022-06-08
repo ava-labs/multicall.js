@@ -1,6 +1,6 @@
 {
   "name": "@avalabs/multicall",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A blockchain state management library for dapps.",
   "contributors": [
     "Mark Milner <mark.milner@avalabs.org>"
@@ -10,13 +10,13 @@
     "multicall",
     "makerdao"
   ],
-  "homepage": "https://github.com/avalabs/multicall.js#readme",
+  "homepage": "https://github.com/ava-labs/multicall.js#readme",
   "bugs": {
-    "url": "https://github.com/avalabs/multicall.js/issues"
+    "url": "https://github.com/ava-labs/multicall.js/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/avalabs/multicall.js.git"
+    "url": "https://github.com/ava-labs/multicall.js.git"
   },
   "main": "dist/multicall.cjs.js",
   "types": "types/multicall.d.ts",
