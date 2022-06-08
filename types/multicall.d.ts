@@ -3,12 +3,14 @@
 import { BigNumber } from 'bignumber.js';
 
 export interface IConfig {
-  preset: 'mainnet' | 'kovan' | 'rinkeby' | 'goerli' | 'xdai' | 'ropsten';
+  // web3.js provider
+  web3: any;
+  // ethers.js provider
+  ethers: any;
   rpcUrl: string;
+  rpcHeaders: Record<string, string>;
   multicallAddress: string;
-  interval: number;
-  staleBlockRetryWait: number;
-  errorRetryWait: number;
+  block: string;
 }
 
 export interface IPostProcess {
