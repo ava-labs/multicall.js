@@ -3,8 +3,6 @@ import { defaultAbiCoder } from '@ethersproject/abi';
 import debug from 'debug';
 const log = debug('multicall');
 
-const defaultAbiCoder = utils.defaultAbiCoder;
-
 // Function signature for: aggregate((address,bytes)[])
 export const AGGREGATE_SELECTOR = '0x252dba42';
 
