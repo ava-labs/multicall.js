@@ -1,7 +1,9 @@
 import fetch from 'cross-fetch';
-import { defaultAbiCoder } from 'ethers/utils/abi-coder';
+import { utils } from 'ethers';
 import debug from 'debug';
 const log = debug('multicall');
+
+const defaultAbiCoder = utils.defaultAbiCoder;
 
 // Function signature for: aggregate((address,bytes)[])
 export const AGGREGATE_SELECTOR = '0x252dba42';
@@ -57,42 +59,9 @@ export function isEmpty(obj) {
   return !obj || Object.keys(obj).length === 0;
 }
 
-export async function ethCall(rawData, { id, web3, rpcUrl, block, multicallAddress, ws, wsResponseTimeout }) {
+export async function ethCall(rawData, { web3, rpcUrl, block, multicallAddress }) {
   const abiEncodedData = AGGREGATE_SELECTOR + strip0x(rawData);
-  if (ws) {
-    log('Sending via WebSocket');
-    return new Promise((resolve, reject) => {
-      ws.send(JSON.stringify({
-        jsonrpc: '2.0',
-        method: 'eth_call',
-        params: [
-          {
-            to: multicallAddress,
-            data: abiEncodedData
-          },
-          block || 'latest'
-        ],
-        id
-      }));
-      function onMessage(data) {
-        if (typeof data !== 'string') data = data.data;
-        const json = JSON.parse(data);
-        if (!json.id || json.id !== id) return;
-        log('Got WebSocket response id #%d', json.id);
-        clearTimeout(timeoutHandle);
-        ws.onmessage = null;
-        resolve(json.result);
-      }
-      const timeoutHandle = setTimeout(() => {
-        if (ws.onmessage !== onMessage) return;
-        ws.onmessage = null;
-        reject(new Error('WebSocket response timeout'));
-      }, wsResponseTimeout);
-
-      ws.onmessage = onMessage;
-    });
-  }
-  else if (web3) {
+  if (web3) {
     log('Sending via web3 provider');
     return web3.eth.call({
       to: multicallAddress,

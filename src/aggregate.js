@@ -1,7 +1,9 @@
-import { id as keccak256 } from 'ethers/utils/hash';
+import { utils } from 'ethers';
 import invariant from 'invariant';
-import { strip0x, ethCall, encodeParameters, decodeParameters } from './helpers.js';
 import memoize from 'lodash/memoize';
+import { decodeParameters, encodeParameters, ethCall, strip0x } from './helpers.js';
+
+const keccak256 = utils.id;
 
 const INSIDE_EVERY_PARENTHESES = /\(.*?\)/g;
 const FIRST_CLOSING_PARENTHESES = /^[^)]*\)/;
@@ -11,9 +13,9 @@ export function _makeMulticallData(calls) {
     calls.map(({ target, method, args, returnTypes }) => [
       target,
       keccak256(method).substr(0, 10) +
-        (args && args.length > 0
-          ? strip0x(encodeParameters(args.map(a => a[1]), args.map(a => a[0])))
-          : '')
+      (args && args.length > 0
+        ? strip0x(encodeParameters(args.map(a => a[1]), args.map(a => a[0])))
+        : '')
     ])
   ];
   const calldata = encodeParameters(
