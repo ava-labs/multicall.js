@@ -1,6 +1,6 @@
 {
   "name": "@avalabs/multicall",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A blockchain state management library for dapps.",
   "contributors": [
     "Mark Milner <mark.milner@avalabs.org>"
@@ -40,9 +40,10 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.7.4",
+    "@ethersproject/abi": "^5.6.3",
+    "@ethersproject/hash": "^5.6.1",
     "cross-fetch": "^3.0.4",
     "debug": "^4.1.1",
-    "ethers": "^5.6.8",
     "invariant": "^2.2.4",
     "lodash": "^4.17.11"
   },

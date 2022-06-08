@@ -1,5 +1,5 @@
 import fetch from 'cross-fetch';
-import { utils } from 'ethers';
+import { defaultAbiCoder } from '@ethersproject/abi';
 import debug from 'debug';
 const log = debug('multicall');
 

@@ -1,9 +1,7 @@
-import { utils } from 'ethers';
+import { id as keccak256 } from '@ethersproject/hash';
 import invariant from 'invariant';
 import memoize from 'lodash/memoize';
 import { decodeParameters, encodeParameters, ethCall, strip0x } from './helpers.js';
-
-const keccak256 = utils.id;
 
 const INSIDE_EVERY_PARENTHESES = /\(.*?\)/g;
 const FIRST_CLOSING_PARENTHESES = /^[^)]*\)/;
