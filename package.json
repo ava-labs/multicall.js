@@ -1,6 +1,6 @@
 {
   "name": "@avalabs/multicall",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A blockchain state management library for dapps.",
   "contributors": [
     "Mark Milner <mark.milner@avalabs.org>"
@@ -25,6 +25,7 @@
   "files": [
     "dist",
     "src",
+    "types",
     "LICENSE",
     "README.md"
   ],

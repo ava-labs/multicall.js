@@ -1,5 +1,3 @@
-/// <reference types="node"/>
-
 declare module '@avalabs/multicall' {
   import { BigNumber } from 'bignumber.js';
 
@@ -41,5 +39,8 @@ declare module '@avalabs/multicall' {
     results: IResult;
   }
 
-  export function aggregate(calls: Partial<ICall>[], config: Partial<IConfig>): Promise<IResponse>;
+  export function aggregate(
+    calls: Partial<ICall>[],
+    config: Partial<IConfig>,
+  ): Promise<IResponse>;
 }
